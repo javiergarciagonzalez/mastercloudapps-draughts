@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>View.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">draughts</a> &gt; <a href="index.source.html" class="el_package">usantatecla.draughts.views</a> &gt; <span class="el_source">View.java</span></div><h1>View.java</h1><pre class="source lang-java linenums">package usantatecla.draughts.views;
+
+import usantatecla.draughts.controllers.InteractorController;
+import usantatecla.draughts.controllers.InteractorControllersVisitor;
+import usantatecla.draughts.controllers.PlayController;
+import usantatecla.draughts.controllers.ResumeController;
+import usantatecla.draughts.controllers.StartController;
+
+<span class="nc bnc" id="L9" title="All 2 branches missed.">public class View implements InteractorControllersVisitor {</span>
+
+    private StartView startView;
+    private PlayView playView;
+    private ResumeView resumeView;
+
+<span class="nc" id="L15">    public View(){</span>
+<span class="nc" id="L16">        this.startView = new StartView();</span>
+<span class="nc" id="L17">        this.playView = new PlayView();</span>
+<span class="nc" id="L18">        this.resumeView = new ResumeView();</span>
+<span class="nc" id="L19">    }</span>
+
+    public void interact(InteractorController controller) {
+<span class="nc bnc" id="L22" title="All 4 branches missed.">        assert controller != null;</span>
+<span class="nc" id="L23">        controller.accept(this);</span>
+<span class="nc" id="L24">    }</span>
+
+    @Override
+    public void visit(StartController startController) {
+<span class="nc bnc" id="L28" title="All 4 branches missed.">        assert startController != null;</span>
+<span class="nc" id="L29">        this.startView.interact(startController);</span>
+<span class="nc" id="L30">    }</span>
+
+    @Override
+    public void visit(PlayController playController) {
+<span class="nc bnc" id="L34" title="All 4 branches missed.">        assert playController != null;</span>
+<span class="nc" id="L35">        this.playView.interact(playController);</span>
+<span class="nc" id="L36">    }</span>
+
+    @Override
+    public void visit(ResumeController resumeController) {
+<span class="nc bnc" id="L40" title="All 4 branches missed.">        assert resumeController != null;</span>
+<span class="nc" id="L41">        this.resumeView.interact(resumeController);</span>
+<span class="nc" id="L42">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

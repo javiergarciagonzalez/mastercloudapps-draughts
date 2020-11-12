@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Logic.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">draughts</a> &gt; <a href="index.source.html" class="el_package">usantatecla.draughts.controllers</a> &gt; <span class="el_source">Logic.java</span></div><h1>Logic.java</h1><pre class="source lang-java linenums">package usantatecla.draughts.controllers;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import usantatecla.draughts.models.Game;
+import usantatecla.draughts.models.State;
+import usantatecla.draughts.models.StateValue;
+
+public class Logic {
+
+	private Game game;
+	private State state;
+	private Map&lt;StateValue, InteractorController&gt; controllers;
+
+<span class="nc" id="L16">	public Logic() {</span>
+<span class="nc" id="L17">		this.game = new Game();</span>
+<span class="nc" id="L18">		this.state = new State();</span>
+<span class="nc" id="L19">        this.controllers = new HashMap&lt;StateValue, InteractorController&gt;();</span>
+<span class="nc" id="L20">		this.controllers.put(StateValue.INITIAL, new StartController(this.game, this.state));</span>
+<span class="nc" id="L21">		this.controllers.put(StateValue.IN_GAME, new PlayController(this.game, this.state));</span>
+<span class="nc" id="L22">		this.controllers.put(StateValue.FINAL, new ResumeController(this.game, this.state));</span>
+<span class="nc" id="L23">		this.controllers.put(StateValue.EXIT, null);</span>
+<span class="nc" id="L24">	}</span>
+
+	public InteractorController getController() {
+<span class="nc" id="L27">		return this.controllers.get(this.state.getValueState());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

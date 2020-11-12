@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">draughts</a> &gt; <a href="index.source.html" class="el_package">usantatecla.draughts.views</a> &gt; <span class="el_source">GameView.java</span></div><h1>GameView.java</h1><pre class="source lang-java linenums">package usantatecla.draughts.views;
+
+import usantatecla.draughts.controllers.InteractorController;
+import usantatecla.draughts.models.Coordinate;
+import usantatecla.draughts.models.Piece;
+
+<span class="nc bnc" id="L7" title="All 2 branches missed.">class GameView extends SubView {</span>
+
+    void write(InteractorController controller) {
+<span class="nc bnc" id="L10" title="All 4 branches missed.">        assert controller != null;</span>
+<span class="nc" id="L11">        final int DIMENSION = controller.getDimension();</span>
+<span class="nc" id="L12">        this.writeNumbersLine(DIMENSION);</span>
+<span class="nc bnc" id="L13" title="All 2 branches missed.">        for (int i = 0; i &lt; DIMENSION; i++)</span>
+<span class="nc" id="L14">            this.writePiecesRow(i, controller);</span>
+<span class="nc" id="L15">        this.writeNumbersLine(DIMENSION);</span>
+<span class="nc" id="L16">    }</span>
+
+    private void writeNumbersLine(final int DIMENSION) {
+<span class="nc" id="L19">        this.console.write(&quot; &quot;);</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        for (int i = 0; i &lt; DIMENSION; i++)</span>
+<span class="nc" id="L21">            this.console.write((i + 1) + &quot;&quot;);</span>
+<span class="nc" id="L22">        this.console.writeln();</span>
+<span class="nc" id="L23">    }</span>
+
+    private void writePiecesRow(final int row, InteractorController controller) {
+<span class="nc" id="L26">        this.console.write((row + 1) + &quot;&quot;);</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        for (int j = 0; j &lt; controller.getDimension(); j++) {</span>
+<span class="nc" id="L28">            Piece piece = controller.getPiece(new Coordinate(row, j));</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">            if (piece == null)</span>
+<span class="nc" id="L30">                this.console.write(&quot; &quot;);</span>
+            else 
+<span class="nc" id="L32">                this.console.write(piece.getCode());</span>
+        }
+<span class="nc" id="L34">        this.console.writeln((row + 1) + &quot;&quot;);</span>
+<span class="nc" id="L35">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

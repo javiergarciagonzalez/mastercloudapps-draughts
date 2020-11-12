@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Board.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">draughts</a> &gt; <a href="index.source.html" class="el_package">usantatecla.draughts.models</a> &gt; <span class="el_source">Board.java</span></div><h1>Board.java</h1><pre class="source lang-java linenums">package usantatecla.draughts.models;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+<span class="pc bpc" id="L7" title="1 of 2 branches missed.">class Board {</span>
+
+    private Piece[][] pieces;
+
+<span class="fc" id="L11">    Board() {</span>
+<span class="fc" id="L12">        this.pieces = new Piece[Coordinate.getDimension()][Coordinate.getDimension()];</span>
+<span class="fc bfc" id="L13" title="All 2 branches covered.">        for (int i = 0; i &lt; Coordinate.getDimension(); i++)</span>
+<span class="fc bfc" id="L14" title="All 2 branches covered.">            for (int j = 0; j &lt; Coordinate.getDimension(); j++)</span>
+<span class="fc" id="L15">                this.pieces[i][j] = null;</span>
+<span class="fc" id="L16">    }</span>
+
+    Piece getPiece(Coordinate coordinate) {
+<span class="pc bpc" id="L19" title="2 of 4 branches missed.">        assert coordinate != null;</span>
+<span class="fc" id="L20">        return this.pieces[coordinate.getRow()][coordinate.getColumn()];</span>
+    }
+
+    void put(Coordinate coordinate, Piece piece) {
+<span class="fc" id="L24">        this.pieces[coordinate.getRow()][coordinate.getColumn()] = piece;</span>
+<span class="fc" id="L25">    }</span>
+
+    Piece remove(Coordinate coordinate) {
+<span class="pc bpc" id="L28" title="1 of 4 branches missed.">        assert this.getPiece(coordinate) != null;</span>
+<span class="fc" id="L29">        Piece piece = this.getPiece(coordinate);</span>
+<span class="fc" id="L30">        this.put(coordinate, null);</span>
+<span class="fc" id="L31">        return piece;</span>
+    }
+
+    void move(Coordinate origin, Coordinate target) {
+<span class="pc bpc" id="L35" title="1 of 4 branches missed.">        assert this.getPiece(origin) != null;</span>
+<span class="fc" id="L36">        this.put(target, this.remove(origin));</span>
+<span class="fc" id="L37">    }</span>
+
+    List&lt;Piece&gt; getBetweenDiagonalPieces(Coordinate origin, Coordinate target) {
+<span class="fc" id="L40">        List&lt;Piece&gt; betweenDiagonalPieces = new ArrayList&lt;Piece&gt;();</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (origin.isOnDiagonal(target))</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            for (Coordinate coordinate : origin.getBetweenDiagonalCoordinates(target)) {</span>
+<span class="fc" id="L43">                Piece piece = this.getPiece(coordinate);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">                if (piece != null)</span>
+<span class="fc" id="L45">                    betweenDiagonalPieces.add(piece);</span>
+<span class="fc" id="L46">            }</span>
+<span class="fc" id="L47">        return betweenDiagonalPieces;</span>
+    }
+
+    int getAmountBetweenDiagonalPieces(Coordinate origin, Coordinate target) {
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (!origin.isOnDiagonal(target))</span>
+<span class="fc" id="L52">            return 0;</span>
+<span class="fc" id="L53">        int betweenDiagonalPieces = 0;</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        for (Coordinate coordinate : origin.getBetweenDiagonalCoordinates(target))</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            if (this.getPiece(coordinate) != null)</span>
+<span class="fc" id="L56">                betweenDiagonalPieces++;</span>
+<span class="fc" id="L57">        return betweenDiagonalPieces;</span>
+    }
+
+    Color getColor(Coordinate coordinate) {
+<span class="fc" id="L61">        final Piece piece = this.getPiece(coordinate);</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (piece == null)</span>
+<span class="nc" id="L63">            return null;</span>
+<span class="fc" id="L64">        return piece.getColor();</span>
+    }
+
+    boolean isEmpty(Coordinate coordinate) {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        return this.getPiece(coordinate) == null;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L73">        String string = &quot;&quot;;</span>
+<span class="nc" id="L74">        string += this.toStringHorizontalNumbers();</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        for (int i = 0; i &lt; Coordinate.getDimension(); i++)</span>
+<span class="nc" id="L76">            string += this.toStringHorizontalPiecesWithNumbers(i);</span>
+<span class="nc" id="L77">        string += this.toStringHorizontalNumbers();</span>
+<span class="nc" id="L78">        return string;</span>
+    }
+
+    private String toStringHorizontalNumbers() {
+<span class="nc" id="L82">        String string = &quot; &quot;;</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        for (int j = 0; j &lt; Coordinate.getDimension(); j++)</span>
+<span class="nc" id="L84">            string += j;</span>
+<span class="nc" id="L85">        return string + &quot;\n&quot;;</span>
+    }
+
+    private String toStringHorizontalPiecesWithNumbers(int row) {
+<span class="nc" id="L89">        String string = &quot; &quot; + row;</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        for (int j = 0; j &lt; Coordinate.getDimension(); j++) {</span>
+<span class="nc" id="L91">            Piece piece = this.getPiece(new Coordinate(row, j));</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (piece == null)</span>
+<span class="nc" id="L93">                string += &quot; &quot;;</span>
+            else {
+<span class="nc" id="L95">                string += piece;</span>
+            }
+        }
+<span class="nc" id="L98">        return string + row + &quot;\n&quot;;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L103">        final int prime = 31;</span>
+<span class="nc" id="L104">        int result = 1;</span>
+<span class="nc" id="L105">        result = prime * result + Arrays.deepHashCode(pieces);</span>
+<span class="nc" id="L106">        return result;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (this == obj)</span>
+<span class="nc" id="L112">            return true;</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="nc" id="L114">            return false;</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc" id="L116">            return false;</span>
+<span class="nc" id="L117">        Board other = (Board) obj;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (!Arrays.deepEquals(pieces, other.pieces))</span>
+<span class="nc" id="L119">            return false;</span>
+<span class="nc" id="L120">        return true;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

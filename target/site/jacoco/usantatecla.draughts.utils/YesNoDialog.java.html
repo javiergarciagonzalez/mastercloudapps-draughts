@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>YesNoDialog.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">draughts</a> &gt; <a href="index.source.html" class="el_package">usantatecla.draughts.utils</a> &gt; <span class="el_source">YesNoDialog.java</span></div><h1>YesNoDialog.java</h1><pre class="source lang-java linenums">package usantatecla.draughts.utils;
+
+<span class="nc bnc" id="L3" title="All 2 branches missed.">public class YesNoDialog  {</span>
+
+	private static final char AFIRMATIVE = 'y';
+	private static final char NEGATIVE = 'n';
+	private static final String QUESTION = &quot;? (&quot;+YesNoDialog.AFIRMATIVE+&quot;/&quot;+YesNoDialog.NEGATIVE+&quot;): &quot;;
+	private static final String ERROR = &quot;The value must be '&quot; + YesNoDialog.AFIRMATIVE + &quot;' or '&quot;
+			+ YesNoDialog.NEGATIVE + &quot;'&quot;;
+    private Console console;
+
+<span class="nc" id="L12">    public YesNoDialog(){</span>
+<span class="nc" id="L13">        this.console = new Console();</span>
+<span class="nc" id="L14">    }</span>
+    
+	public boolean read(String title) {
+<span class="nc bnc" id="L17" title="All 4 branches missed.">		assert title != null;</span>
+		char answer;
+		boolean ok;
+		do {
+<span class="nc" id="L21">			answer = this.console.readChar(title + YesNoDialog.QUESTION);</span>
+<span class="nc bnc" id="L22" title="All 4 branches missed.">			ok = YesNoDialog.isAfirmative(answer) || YesNoDialog.isNegative(answer);</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">			if (!ok) {</span>
+<span class="nc" id="L24">				this.console.writeln(YesNoDialog.ERROR);</span>
+			}
+<span class="nc bnc" id="L26" title="All 2 branches missed.">		} while (!ok);</span>
+<span class="nc" id="L27">		return YesNoDialog.isAfirmative(answer);</span>
+	}
+
+	private static boolean isAfirmative(char answer) {
+<span class="nc bnc" id="L31" title="All 2 branches missed.">		return Character.toLowerCase(answer) == YesNoDialog.AFIRMATIVE;</span>
+	}
+
+	private static boolean isNegative(char answer) {
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		return Character.toLowerCase(answer) == YesNoDialog.NEGATIVE;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

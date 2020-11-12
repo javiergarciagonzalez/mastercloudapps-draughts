@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">draughts</a> &gt; <a href="index.source.html" class="el_package">usantatecla.draughts.views</a> &gt; <span class="el_source">PlayView.java</span></div><h1>PlayView.java</h1><pre class="source lang-java linenums">package usantatecla.draughts.views;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import usantatecla.draughts.controllers.PlayController;
+import usantatecla.draughts.models.Error;
+import usantatecla.draughts.models.Color;
+import usantatecla.draughts.models.Coordinate;
+
+<span class="nc bnc" id="L12" title="All 2 branches missed.">class PlayView extends SubView {</span>
+    
+    private static final String COLOR_PARAM = &quot;#color&quot;;
+<span class="nc" id="L15">    private static final String[] COLOR_VALUES = { &quot;blancas&quot;, &quot;negras&quot; };</span>
+    private static final String PROMPT = &quot;Mueven las &quot; + PlayView.COLOR_PARAM + &quot;: &quot;;
+    private static final String CANCEL_FORMAT = &quot;-1&quot;;
+    private static final String MOVEMENT_FORMAT = &quot;[1-8]{2}(\\.[1-8]{2}){1,2}&quot;;
+    private static final String ERROR_MESSAGE = &quot;Error!!! Formato incorrecto&quot;;
+    private static final String LOST_MESSAGE = &quot;Derrota!!! No puedes mover tus fichas!!!&quot;;
+    private String string;
+
+    PlayView() {
+<span class="nc" id="L24">        super();</span>
+<span class="nc" id="L25">    }</span>
+
+    void interact(PlayController playController) {
+<span class="nc bnc" id="L28" title="All 4 branches missed.">        assert playController != null;</span>
+        Error error;
+        do {
+<span class="nc" id="L31">            error = null;</span>
+<span class="nc" id="L32">            this.string = this.read(playController.getColor());</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (this.isCanceledFormat())</span>
+<span class="nc" id="L34">                playController.cancel();</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            else if (!this.isMoveFormat()) {</span>
+<span class="nc" id="L36">                error = Error.BAD_FORMAT;</span>
+<span class="nc" id="L37">                this.writeError();</span>
+            } else {
+<span class="nc" id="L39">                error = playController.move(this.getCoordinates());</span>
+<span class="nc" id="L40">                new GameView().write(playController);</span>
+<span class="nc bnc" id="L41" title="All 4 branches missed.">                if (error == null &amp;&amp; playController.isBlocked())</span>
+<span class="nc" id="L42">                    this.writeLost();</span>
+            }
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        } while (error != null);</span>
+<span class="nc" id="L45">    }</span>
+
+    private String read(Color color) {
+<span class="nc" id="L48">        final String titleColor = PlayView.PROMPT.replace(PlayView.COLOR_PARAM ,PlayView.COLOR_VALUES[color.ordinal()]);</span>
+<span class="nc" id="L49">        return this.console.readString(titleColor);</span>
+    }
+
+    private boolean isCanceledFormat() {
+<span class="nc" id="L53">        return string.equals(PlayView.CANCEL_FORMAT);</span>
+    }
+
+    private boolean isMoveFormat() {
+<span class="nc" id="L57">        return Pattern.compile(PlayView.MOVEMENT_FORMAT).matcher(string).find();</span>
+    }
+
+    private void writeError(){
+<span class="nc" id="L61">        this.console.writeln(PlayView.ERROR_MESSAGE);</span>
+<span class="nc" id="L62">    }</span>
+
+    private Coordinate[] getCoordinates() {
+<span class="nc bnc" id="L65" title="All 4 branches missed.">        assert this.isMoveFormat();</span>
+<span class="nc" id="L66">        List&lt;Coordinate&gt; coordinateList = new ArrayList&lt;Coordinate&gt;();</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        while (string.length() &gt; 0){</span>
+<span class="nc" id="L68">            coordinateList.add(Coordinate.getInstance(string.substring(0, 2)));</span>
+<span class="nc" id="L69">            string = string.substring(2, string.length());</span>
+<span class="nc bnc" id="L70" title="All 4 branches missed.">            if (string.length() &gt; 0 &amp;&amp; string.charAt(0) == '.')</span>
+<span class="nc" id="L71">                string = string.substring(1, string.length());</span>
+        }
+<span class="nc" id="L73">        Coordinate[] coordinates = new Coordinate[coordinateList.size()];</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        for(int i=0; i&lt; coordinates.length; i++){</span>
+<span class="nc" id="L75">            coordinates[i] = coordinateList.get(i);</span>
+        }
+<span class="nc" id="L77">        return coordinates;</span>
+    }
+
+    private void writeLost() {
+<span class="nc" id="L81">        this.console.writeln(LOST_MESSAGE);</span>
+<span class="nc" id="L82">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

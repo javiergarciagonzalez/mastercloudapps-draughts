@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="13" failures="0" name="usantatecla.draughts.models.BoardTest" time="0" errors="0" skipped="0">
+  <properties>
+    <property name="java.vendor" value="AdoptOpenJDK"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.runtime.version" value="15+36"/>
+    <property name="user.name" value="javiergarciagonzalez"/>
+    <property name="java.compiler" value="j9jit29"/>
+    <property name="os.encoding" value="UTF-8"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="com.ibm.util.extralibs.properties" value=""/>
+    <property name="com.ibm.jcl.checkClassPath" value=""/>
+    <property name="user.language" value="en"/>
+    <property name="com.ibm.oti.vm.bootstrap.library.path" value="/Users/javiergarciagonzalez/Library/Java/JavaVirtualMachines/adopt-openj9-15/Contents/Home/lib/compressedrefs:/Users/javiergarciagonzalez/Library/Java/JavaVirtualMachines/adopt-openj9-15/Contents/Home/lib"/>
+    <property name="idea.version" value="2020.2.3"/>
+    <property name="sun.boot.library.path" value="/Users/javiergarciagonzalez/Library/Java/JavaVirtualMachines/adopt-openj9-15/Contents/Home/lib/compressedrefs:/Users/javiergarciagonzalez/Library/Java/JavaVirtualMachines/adopt-openj9-15/Contents/Home/lib"/>
+    <property name="classworlds.conf" value="/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/m2.conf"/>
+    <property name="jdk.extensions.version" value="15.0.0.0"/>
+    <property name="java.version" value="15"/>
+    <property name="user.timezone" value="Europe/Amsterdam"/>
+    <property name="com.ibm.system.agent.path" value="/Users/javiergarciagonzalez/Library/Java/JavaVirtualMachines/adopt-openj9-15/Contents/Home/lib"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="com.ibm.oti.vm.library.version" value="29"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="maven.conf" value="/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/conf"/>
+    <property name="java.class.version" value="59.0"/>
+    <property name="user.country" value="US"/>
+    <property name="java.home" value="/Users/javiergarciagonzalez/Library/Java/JavaVirtualMachines/adopt-openj9-15/Contents/Home"/>
+    <property name="java.vm.info" value="JRE 15 Mac OS X amd64-64-Bit Compressed References 20200922_45 (JIT enabled, AOT enabled)
+OpenJ9   - 1830b1927
+OMR      - 73d5e7623
+JCL      - 7e7613c015 based on jdk-15+36"/>
+    <property name="os.version" value="10.15.7"/>
+    <property name="jdk.boot.class.path.append" value=""/>
+    <property name="sun.nio.MaxDirectMemorySize" value="7516192768"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.version" value="openj9-0.22.0"/>
+    <property name="user.variant" value=""/>
+    <property name="maven.ext.class.path" value="/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven-event-listener.jar"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="jdk.extensions.name" value="Extensions for OpenJDK for Eclipse OpenJ9"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.nio.PageAlignDirectMemory" value="false"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="ibm.signalhandling.sigint" value="true"/>
+    <property name="user.home" value="/Users/javiergarciagonzalez"/>
+    <property name="com.ibm.cpu.endian" value="little"/>
+    <property name="java.version.date" value="2020-09-15"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="ibm.signalhandling.sigchain" value="true"/>
+    <property name="java.library.path" value="/Users/javiergarciagonzalez/Library/Java/JavaVirtualMachines/adopt-openj9-15/Contents/Home/lib/compressedrefs:/Users/javiergarciagonzalez/Library/Java/JavaVirtualMachines/adopt-openj9-15/Contents/Home/lib:/usr/lib"/>
+    <property name="java.vendor.url" value="https://adoptopenjdk.net/"/>
+    <property name="java.vm.vendor" value="Eclipse OpenJ9"/>
+    <property name="java.fullversion" value="15+36
+JRE 15 Mac OS X amd64-64-Bit Compressed References 20200922_45 (JIT enabled, AOT enabled)
+OpenJ9   - 1830b1927
+OMR      - 73d5e7623
+JCL      - 7e7613c015 based on jdk-15+36"/>
+    <property name="maven.home" value="/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2020.2.3 install"/>
+    <property name="java.class.path" value="/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/boot/plexus-classworlds.license:/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.vm.specification.version" value="15"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.io.tmpdir" value="/var/folders/2q/9y9lkzfs6jb7nfn5728fnq0r0000gn/T/"/>
+    <property name="java.vendor.url.bug" value="https://github.com/AdoptOpenJDK/openjdk-support/issues"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/javiergarciagonzalez/Documents/Master Cloud Apps/Materia/Modulo 1/mastercloudapps-draughts"/>
+    <property name="ibm.system.encoding" value="UTF-8"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="ibm.signalhandling.rs" value="false"/>
+    <property name="user.dir" value="/Users/javiergarciagonzalez/Documents/Master Cloud Apps/Materia/Modulo 1/mastercloudapps-draughts"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.name" value="Eclipse OpenJ9 VM"/>
+    <property name="com.ibm.oti.shared.enabled" value="false"/>
+    <property name="com.ibm.vm.bitmode" value="64"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="15"/>
+    <property name="com.ibm.oti.configuration" value="scar"/>
+    <property name="java.vendor.version" value="AdoptOpenJDK"/>
+  </properties>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenAWrongCoordinateWhenMovingAPieceThereThenItShouldFail" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenACoordinateWhenGettingANonExistingPieceThenItReturnsNull" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenAOutOfBoundsCoordinateWhenGettingAPieceThenItShouldFail" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenTwoCoordinatesWhenGettingTheDiagonalBetweenThemThenIsCorrect" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenTwoCoordinatesWithoutPieceInBetweenWhenGettingThePieceInBetweenThenItReturnsAnEmptyList" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenACoordinateWhenMovingAPieceThatIsNotThereThenItShouldFail" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenTwoCoordinatesWhenGettingTheAmountOfPiecesInBetweenThenIsCorrect" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenTwoBadCoordinatesWhenGettingTheAmountOfPiecesInBetweenThenItReturnsZero" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenTwoCoordinatesWithoutPieceInBetweenWhenGettingTheAmountOfPieceInBetweenThenItReturnsZero" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenAFullBoardWhenRemovingACoordinateEmptyThenIsClear" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenBadCoordinatesWhenGettingDiagonalInBetweenThenItReturnsAnEmptyList" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenABoardWhenCheckingItsPiecesThenIsCorrect" time="0"/>
+  <testcase classname="usantatecla.draughts.models.BoardTest" name="TestGivenAFullBoardWhenRemovingACoordinateThenIsClear" time="0"/>
+</testsuite>

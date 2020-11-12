@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Piece.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">draughts</a> &gt; <a href="index.source.html" class="el_package">usantatecla.draughts.models</a> &gt; <span class="el_source">Piece.java</span></div><h1>Piece.java</h1><pre class="source lang-java linenums">package usantatecla.draughts.models;
+
+import java.util.List;
+
+<span class="pc bpc" id="L5" title="1 of 2 branches missed.">public abstract class Piece {</span>
+
+    protected Color color;
+<span class="fc" id="L8">    private static String[] CODES = {&quot;b&quot;, &quot;n&quot;};</span>
+
+<span class="fc" id="L10">    Piece(Color color) {</span>
+<span class="pc bpc" id="L11" title="2 of 4 branches missed.">        assert color != null;</span>
+<span class="fc" id="L12">        this.color = color;</span>
+<span class="fc" id="L13">    }</span>
+
+    Error isCorrectMovement(List&lt;Piece&gt; betweenDiagonalPieces, int pair, Coordinate... coordinates){
+<span class="nc bnc" id="L16" title="All 4 branches missed.">        assert coordinates[pair] != null;</span>
+<span class="nc bnc" id="L17" title="All 4 branches missed.">        assert coordinates[pair + 1] != null;</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        if (!coordinates[pair].isOnDiagonal(coordinates[pair + 1]))</span>
+<span class="nc" id="L19">            return Error.NOT_DIAGONAL;</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        for(Piece piece : betweenDiagonalPieces)</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">            if (this.color == piece.getColor())</span>
+<span class="nc" id="L22">                return Error.COLLEAGUE_EATING;</span>
+<span class="nc" id="L23">        return this.isCorrectDiagonalMovement(betweenDiagonalPieces.size(), pair, coordinates);</span>
+    }
+
+    abstract Error isCorrectDiagonalMovement(int amountBetweenDiagonalPieces, int pair, Coordinate... coordinates);
+
+    boolean isLimit(Coordinate coordinate) {
+<span class="nc bnc" id="L29" title="All 4 branches missed.">        return coordinate.isFirst() &amp;&amp; this.getColor() == Color.WHITE</span>
+<span class="nc bnc" id="L30" title="All 4 branches missed.">                || coordinate.isLast() &amp;&amp; this.getColor() == Color.BLACK;</span>
+    }
+
+    boolean isAdvanced(Coordinate origin, Coordinate target) {
+<span class="pc bpc" id="L34" title="2 of 4 branches missed.">        assert origin != null;</span>
+<span class="pc bpc" id="L35" title="2 of 4 branches missed.">        assert target != null;</span>
+<span class="fc" id="L36">        int difference = origin.getRow() - target.getRow();</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (color == Color.WHITE)</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            return difference &gt; 0;</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        return difference &lt; 0;</span>
+    }
+
+    public Color getColor() {
+<span class="fc" id="L43">        return this.color;</span>
+    }
+
+    public String getCode(){
+<span class="nc" id="L47">        return Piece.CODES[this.color.ordinal()];</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L52">        return this.getCode();</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L57">        final int prime = 31;</span>
+<span class="nc" id="L58">        int result = 1;</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        result = prime * result + ((color == null) ? 0 : color.hashCode());</span>
+<span class="nc" id="L60">        return result;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (this == obj)</span>
+<span class="fc" id="L66">            return true;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="nc" id="L68">            return false;</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc" id="L70">            return false;</span>
+<span class="nc" id="L71">        Piece other = (Piece) obj;</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (color != other.color)</span>
+<span class="nc" id="L73">            return false;</span>
+<span class="nc" id="L74">        return true;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

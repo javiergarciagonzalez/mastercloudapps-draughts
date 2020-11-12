@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">draughts</a> &gt; <a href="index.source.html" class="el_package">usantatecla.draughts.models</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package usantatecla.draughts.models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc bnc" id="L6" title="All 2 branches missed.">public class Game {</span>
+
+	private Board board;
+	private Turn turn;
+
+<span class="nc" id="L11">	Game(Board board) {</span>
+<span class="nc" id="L12">		this.turn = new Turn();</span>
+<span class="nc" id="L13">		this.board = board;</span>
+<span class="nc" id="L14">	}</span>
+
+	public Game() {
+<span class="nc" id="L17">		this(new Board());</span>
+<span class="nc" id="L18">		this.reset();</span>
+<span class="nc" id="L19">	}</span>
+
+	public void reset() {
+<span class="nc bnc" id="L22" title="All 2 branches missed.">		for (int i = 0; i &lt; Coordinate.getDimension(); i++)</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">			for (int j = 0; j &lt; Coordinate.getDimension(); j++) {</span>
+<span class="nc" id="L24">				Coordinate coordinate = new Coordinate(i, j);</span>
+<span class="nc" id="L25">				Color color = Color.getInitialColor(coordinate);</span>
+<span class="nc" id="L26">				Piece piece = null;</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">				if (color != null)</span>
+<span class="nc" id="L28">					piece = new Pawn(color);</span>
+<span class="nc" id="L29">				this.board.put(coordinate, piece);</span>
+			}
+<span class="nc bnc" id="L31" title="All 2 branches missed.">		if (this.turn.getColor() != Color.WHITE)</span>
+<span class="nc" id="L32">			this.turn.change();</span>
+<span class="nc" id="L33">	}</span>
+
+	public Error move(Coordinate... coordinates) {
+<span class="nc" id="L36">		Error error = null;</span>
+<span class="nc" id="L37">		List&lt;Coordinate&gt; removedCoordinates = new ArrayList&lt;Coordinate&gt;();</span>
+<span class="nc" id="L38">		int pair = 0;</span>
+		do {
+<span class="nc" id="L40">			error = this.isCorrectPairMove(pair, coordinates);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">			if (error == null) {</span>
+<span class="nc" id="L42">				this.pairMove(removedCoordinates, pair, coordinates);</span>
+<span class="nc" id="L43">				pair++;</span>
+			}
+<span class="nc bnc" id="L45" title="All 4 branches missed.">		} while (pair &lt; coordinates.length - 1 &amp;&amp; error == null);</span>
+<span class="nc" id="L46">		error = this.isCorrectGlobalMove(error, removedCoordinates, coordinates);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">		if (error == null)</span>
+<span class="nc" id="L48">			this.turn.change();</span>
+		else
+<span class="nc" id="L50">			this.unMovesUntilPair(removedCoordinates, pair, coordinates);</span>
+<span class="nc" id="L51">		return error;</span>
+	}
+
+	private Error isCorrectPairMove(int pair, Coordinate... coordinates) {
+<span class="nc bnc" id="L55" title="All 4 branches missed.">		assert coordinates[pair] != null;</span>
+<span class="nc bnc" id="L56" title="All 4 branches missed.">		assert coordinates[pair + 1] != null;</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">		if (board.isEmpty(coordinates[pair]))</span>
+<span class="nc" id="L58">			return Error.EMPTY_ORIGIN;</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">		if (this.turn.getOppositeColor() == this.board.getColor(coordinates[pair]))</span>
+<span class="nc" id="L60">			return Error.OPPOSITE_PIECE;</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">		if (!this.board.isEmpty(coordinates[pair + 1]))</span>
+<span class="nc" id="L62">			return Error.NOT_EMPTY_TARGET;</span>
+<span class="nc" id="L63">		List&lt;Piece&gt; betweenDiagonalPieces = </span>
+<span class="nc" id="L64">			this.board.getBetweenDiagonalPieces(coordinates[pair], coordinates[pair + 1]);</span>
+<span class="nc" id="L65">		return this.board.getPiece(coordinates[pair]).isCorrectMovement(betweenDiagonalPieces, pair, coordinates);</span>
+	}
+
+	private void pairMove(List&lt;Coordinate&gt; removedCoordinates, int pair, Coordinate... coordinates) {
+<span class="nc" id="L69">		Coordinate forRemoving = this.getBetweenDiagonalPiece(pair, coordinates);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">		if (forRemoving != null) {</span>
+<span class="nc" id="L71">			removedCoordinates.add(0, forRemoving);</span>
+<span class="nc" id="L72">			this.board.remove(forRemoving);</span>
+		}
+<span class="nc" id="L74">		this.board.move(coordinates[pair], coordinates[pair + 1]);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">		if (this.board.getPiece(coordinates[pair + 1]).isLimit(coordinates[pair + 1])) {</span>
+<span class="nc" id="L76">			Color color = this.board.getColor(coordinates[pair + 1]);</span>
+<span class="nc" id="L77">			this.board.remove(coordinates[pair + 1]);</span>
+<span class="nc" id="L78">			this.board.put(coordinates[pair + 1], new Draught(color));</span>
+		}
+<span class="nc" id="L80">	}</span>
+
+	private Coordinate getBetweenDiagonalPiece(int pair, Coordinate... coordinates) {
+<span class="nc bnc" id="L83" title="All 4 branches missed.">		assert coordinates[pair].isOnDiagonal(coordinates[pair + 1]);</span>
+<span class="nc" id="L84">		List&lt;Coordinate&gt; betweenCoordinates = coordinates[pair].getBetweenDiagonalCoordinates(coordinates[pair + 1]);</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">		if (betweenCoordinates.isEmpty())</span>
+<span class="nc" id="L86">			return null;</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">		for (Coordinate coordinate : betweenCoordinates) {</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">			if (this.getPiece(coordinate) != null)</span>
+<span class="nc" id="L89">				return coordinate;</span>
+<span class="nc" id="L90">		}</span>
+<span class="nc" id="L91">		return null;</span>
+	}
+
+	private Error isCorrectGlobalMove(Error error, List&lt;Coordinate&gt; removedCoordinates, Coordinate... coordinates){
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		if (error != null)</span>
+<span class="nc" id="L96">			return error;</span>
+<span class="nc bnc" id="L97" title="All 4 branches missed.">		if (coordinates.length &gt; 2 &amp;&amp; coordinates.length &gt; removedCoordinates.size() + 1)</span>
+<span class="nc" id="L98">			return Error.TOO_MUCH_JUMPS;</span>
+<span class="nc" id="L99">		return null;</span>
+	}
+
+	private void unMovesUntilPair(List&lt;Coordinate&gt; removedCoordinates, int pair, Coordinate... coordinates) {
+<span class="nc bnc" id="L103" title="All 2 branches missed.">		for (int j = pair; j &gt; 0; j--)</span>
+<span class="nc" id="L104">			this.board.move(coordinates[j], coordinates[j - 1]);</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">		for (Coordinate removedPiece : removedCoordinates)</span>
+<span class="nc" id="L106">			this.board.put(removedPiece, new Pawn(this.getOppositeTurnColor()));</span>
+<span class="nc" id="L107">	}</span>
+
+	public boolean isBlocked() {
+<span class="nc bnc" id="L110" title="All 2 branches missed.">		for (Coordinate coordinate : this.getCoordinatesWithActualColor())</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">			if (!this.isBlocked(coordinate))</span>
+<span class="nc" id="L112">				return false;</span>
+<span class="nc" id="L113">		return true;</span>
+	}
+
+	private List&lt;Coordinate&gt; getCoordinatesWithActualColor() {
+<span class="nc" id="L117">		List&lt;Coordinate&gt; coordinates = new ArrayList&lt;Coordinate&gt;();</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">		for (int i = 0; i &lt; this.getDimension(); i++) {</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">			for (int j = 0; j &lt; this.getDimension(); j++) {</span>
+<span class="nc" id="L120">				Coordinate coordinate = new Coordinate(i, j);</span>
+<span class="nc" id="L121">				Piece piece = this.getPiece(coordinate);</span>
+<span class="nc bnc" id="L122" title="All 4 branches missed.">				if (piece != null &amp;&amp; piece.getColor() == this.getTurnColor())</span>
+<span class="nc" id="L123">					coordinates.add(coordinate);</span>
+			}
+		}
+<span class="nc" id="L126">		return coordinates;</span>
+	}
+
+	private boolean isBlocked(Coordinate coordinate) {
+<span class="nc bnc" id="L130" title="All 2 branches missed.">		for (int i = 1; i &lt;= 2; i++)</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">			for (Coordinate target : coordinate.getDiagonalCoordinates(i))</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">				if (this.isCorrectPairMove(0, coordinate, target) == null)</span>
+<span class="nc" id="L133">					return false;</span>
+<span class="nc" id="L134">		return true;</span>
+	}
+
+	public void cancel() {
+<span class="nc bnc" id="L138" title="All 2 branches missed.">		for (Coordinate coordinate : this.getCoordinatesWithActualColor())</span>
+<span class="nc" id="L139">			this.board.remove(coordinate);</span>
+<span class="nc" id="L140">		this.turn.change();</span>
+<span class="nc" id="L141">	}</span>
+
+	public Color getColor(Coordinate coordinate) {
+<span class="nc bnc" id="L144" title="All 4 branches missed.">		assert coordinate != null;</span>
+<span class="nc" id="L145">		return this.board.getColor(coordinate);</span>
+	}
+
+	public Color getTurnColor() {
+<span class="nc" id="L149">		return this.turn.getColor();</span>
+	}
+
+	private Color getOppositeTurnColor() {
+<span class="nc" id="L153">		return this.turn.getOppositeColor();</span>
+	}
+
+	public Piece getPiece(Coordinate coordinate) {
+<span class="nc bnc" id="L157" title="All 4 branches missed.">		assert coordinate != null;</span>
+<span class="nc" id="L158">		return this.board.getPiece(coordinate);</span>
+	}
+
+	public int getDimension() {
+<span class="nc" id="L162">		return Coordinate.getDimension();</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="nc" id="L167">		return this.board + &quot;\n&quot; + this.turn;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L172">		final int prime = 31;</span>
+<span class="nc" id="L173">		int result = 1;</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">		result = prime * result + ((board == null) ? 0 : board.hashCode());</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">		result = prime * result + ((turn == null) ? 0 : turn.hashCode());</span>
+<span class="nc" id="L176">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L181" title="All 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L182">			return true;</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L184">			return false;</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L186">			return false;</span>
+<span class="nc" id="L187">		Game other = (Game) obj;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">		if (board == null) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">			if (other.board != null)</span>
+<span class="nc" id="L190">				return false;</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">		} else if (!board.equals(other.board))</span>
+<span class="nc" id="L192">			return false;</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">		if (turn == null) {</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">			if (other.turn != null)</span>
+<span class="nc" id="L195">				return false;</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">		} else if (!turn.equals(other.turn))</span>
+<span class="nc" id="L197">			return false;</span>
+<span class="nc" id="L198">		return true;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
