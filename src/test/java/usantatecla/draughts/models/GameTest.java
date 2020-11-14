@@ -1,11 +1,7 @@
 package usantatecla.draughts.models;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,26 +9,19 @@ import org.junit.Test;
 public class GameTest {
 
     private Game game;
-    private Board board;
-    private Turn turn;
-
-    public GameTest() {
-
-        this.board = new Board();
-        this.game = new Game(this.board);
-        this.turn = new Turn();
-    }
 
     @Before
     public void fillBoard() {
-        this.board.put(new Coordinate(0,0), new Draught(Color.WHITE));
-        this.board.put(new Coordinate(1,1), new Draught(Color.BLACK));
-        this.board.put(new Coordinate(2,2), new Draught(Color.WHITE));
-        this.board.put(new Coordinate(3,3), new Draught(Color.BLACK));
-        this.board.put(new Coordinate(4,4), new Draught(Color.WHITE));
-        this.board.put(new Coordinate(5,5), new Draught(Color.BLACK));
-        this.board.put(new Coordinate(6,6), new Draught(Color.WHITE));
-        this.board.put(new Coordinate(7,7), new Draught(Color.BLACK));
+        this.game = new GameBuilder().build(
+            " n n n n",
+            "n n n n ",
+            " n n n n",
+            "        ",
+            "        ",
+            "b b b b ",
+            " b b b b",
+            "b b b b "
+        );
     }
 
     @Test
@@ -56,9 +45,9 @@ public class GameTest {
 
     @Test
     public void TestGivenABoardWhenMovingItsPiecesThenIsCorrect() {
-        Coordinate target = new Coordinate(3, 5);
+        Coordinate target = new Coordinate(4,1);
         assertNull(this.game.getPiece(target));
-        Coordinate [] coordinates = {new Coordinate(4,4), target};
+        Coordinate [] coordinates = {new Coordinate(5,0), target};
         this.game.move(coordinates);
         assertNotNull(this.game.getPiece(target));
     }
