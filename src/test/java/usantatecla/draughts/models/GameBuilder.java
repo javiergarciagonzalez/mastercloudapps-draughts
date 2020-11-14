@@ -2,10 +2,23 @@ package usantatecla.draughts.models;
 
 import java.util.Arrays;
 
-
 public class GameBuilder {
 
+    String[] defaultRows = {
+    " n n n n",
+    "n n n n ",
+    " n n n n",
+    "        ",
+    "        ",
+    "b b b b ",
+    " b b b b",
+    "b b b b "};
+
     public Game build(String... rows) {
+
+        if (rows.length == 0) {
+            rows = defaultRows;
+        }
         assert rows.length == 8;
 
         Board board = new Board();
