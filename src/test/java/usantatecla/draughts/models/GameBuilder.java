@@ -15,24 +15,21 @@ public class GameBuilder {
     "b b b b "};
 
     public Game build(String... rows) {
-
         if (rows.length == 0) {
             rows = defaultRows;
         }
+
         assert rows.length == 8;
 
         Board board = new Board();
         Game game = new Game(board);
-
         Error error;
 
-        int index = 0;
-        for (String row : rows) {
-            error = this.setRow(board, row, index);
+        for (int i = 0; i < rows.length; i++) {
+            error = this.setRow(board, rows[i], i);
             if (error != null) {
                 return null;
             }
-            index++;
         }
 
         return game;
