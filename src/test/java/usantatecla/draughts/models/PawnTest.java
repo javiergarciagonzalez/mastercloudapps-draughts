@@ -22,13 +22,13 @@ public class PawnTest {
     }
 
     @Test (expected = AssertionError.class)
-    public void testGivenANotDiagonalPairOfCoordinatesWhenCheckingDiagonalForBlackPawnThenItThrowsAssertionError() throws AssertionError {
+    public void testGivenANotDiagonalPairOfCoordinatesWhenCheckingDiagonalForBlackPawnThenItIsError() throws AssertionError {
         Coordinate [] diagonalCoordinatesBlack ={new Coordinate(1,7), new Coordinate(2,7)};
         assertEquals(null, this.pawnBlack.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesBlack));
     }
 
     @Test (expected = AssertionError.class)
-    public void testGivenANotDiagonalPairOfCoordinatesWhenCheckingDiagonalForWhitePawnThenItThrowsAssertionError() throws AssertionError {
+    public void testGivenANotDiagonalPairOfCoordinatesWhenCheckingDiagonalForWhitePawnThenItIsError() throws AssertionError {
         Coordinate [] diagonalCoordinatesWhite ={new Coordinate(7,2), new Coordinate(6,2)};
         assertEquals(null, this.pawnWhite.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesWhite));
     }

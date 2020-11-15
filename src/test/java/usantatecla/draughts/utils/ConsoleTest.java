@@ -12,6 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+
+// Copiado de tictactoe para coger inspiración
+// https://github.com/USantaTecla-ticTacToe/tictactoe/blob/mvp.pm.withProxy/src/test/java/usantatecla/utils/ConsoleTest.java
+
 @RunWith(MockitoJUnitRunner.class)
 public class ConsoleTest {
 
