@@ -27,4 +27,8 @@ public enum Color {
         return NULL;
     }
 
+    boolean isNull() {
+        return this.equals(Color.NULL);
+    }
+
 }

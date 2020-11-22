@@ -41,11 +41,11 @@ public class ColorTest {
     public void TestGivenACoordinateOutOfLimitsWhenCheckingItsColorThenIsNull() {
         when(coordinate.getRow()).thenReturn(1);
         Color lowerLimitColor = Color.getInitialColor(coordinate);
-        assertTrue(Color.NULL == lowerLimitColor);
+        assertTrue(lowerLimitColor.isNull());
 
         when(coordinate.getRow()).thenReturn(6);
         Color upperLimitColor = Color.getInitialColor(coordinate);
-        assertTrue(Color.NULL == upperLimitColor);
+        assertTrue(upperLimitColor.isNull());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ColorTest {
         when(coordinate.getRow()).thenReturn(4);
 
         Color color = Color.getInitialColor(coordinate);
-        assertTrue(Color.NULL == color);
+        assertTrue(color.isNull());
     }
 
     @Test
@@ -62,6 +62,6 @@ public class ColorTest {
         when(coordinate.isBlack()).thenReturn(false);
 
         Color color = Color.getInitialColor(coordinate);
-        assertTrue(Color.NULL == color);
+        assertTrue(color.isNull());
     }
 }

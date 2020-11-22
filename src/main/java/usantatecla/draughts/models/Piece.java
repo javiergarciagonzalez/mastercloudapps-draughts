@@ -56,7 +56,7 @@ public abstract class Piece {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((color == Color.NULL) ? 0 : color.hashCode());
+        result = prime * result + ((color.isNull()) ? 0 : color.hashCode());
         return result;
     }
 
