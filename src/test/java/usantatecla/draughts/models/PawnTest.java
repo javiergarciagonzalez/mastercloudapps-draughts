@@ -16,21 +16,21 @@ public class PawnTest {
     @Test
     public void testGivenASetOfAllowedPairOfCoordinatesWhenCheckingDiagonalThenIsCorrect() {
         Coordinate [] diagonalCoordinatesBlack ={new Coordinate(1,7), new Coordinate(2,6)};
-        assertEquals(null, this.pawnBlack.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesBlack));
+        assertEquals(Error.NULL, this.pawnBlack.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesBlack));
         Coordinate [] diagonalCoordinatesWhite ={new Coordinate(7,2), new Coordinate(6,3)};
-        assertEquals(null, this.pawnWhite.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesWhite));
+        assertEquals(Error.NULL, this.pawnWhite.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesWhite));
     }
 
     @Test (expected = AssertionError.class)
     public void testGivenANotDiagonalPairOfCoordinatesWhenCheckingDiagonalForBlackPawnThenItIsError() throws AssertionError {
         Coordinate [] diagonalCoordinatesBlack ={new Coordinate(1,7), new Coordinate(2,7)};
-        assertEquals(null, this.pawnBlack.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesBlack));
+        assertEquals(Error.NULL, this.pawnBlack.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesBlack));
     }
 
     @Test (expected = AssertionError.class)
     public void testGivenANotDiagonalPairOfCoordinatesWhenCheckingDiagonalForWhitePawnThenItIsError() throws AssertionError {
         Coordinate [] diagonalCoordinatesWhite ={new Coordinate(7,2), new Coordinate(6,2)};
-        assertEquals(null, this.pawnWhite.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesWhite));
+        assertEquals(Error.NULL, this.pawnWhite.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesWhite));
     }
 
     @Test

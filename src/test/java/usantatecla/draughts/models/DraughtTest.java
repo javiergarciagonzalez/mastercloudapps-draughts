@@ -16,11 +16,11 @@ public class DraughtTest {
     @Test
     public void testGivenASetOfAllowedPairOfCoordinatesWhenCheckingDiagonalThenIsCorrect() {
         Coordinate [] diagonalCoordinatesBlack ={new Coordinate(5,3), new Coordinate(6,2)};
-        assertEquals(null, this.draughtBlack.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesBlack));
-        assertEquals(null, this.draughtBlack.isCorrectDiagonalMovement(1, 0, diagonalCoordinatesBlack));
+        assertEquals(Error.NULL, this.draughtBlack.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesBlack));
+        assertEquals(Error.NULL, this.draughtBlack.isCorrectDiagonalMovement(1, 0, diagonalCoordinatesBlack));
         Coordinate [] diagonalCoordinatesWhite ={new Coordinate(6,3), new Coordinate(3,6)};
-        assertEquals(null, this.draughtWhite.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesWhite));
-        assertEquals(null, this.draughtWhite.isCorrectDiagonalMovement(1, 0, diagonalCoordinatesWhite));
+        assertEquals(Error.NULL, this.draughtWhite.isCorrectDiagonalMovement(0, 0, diagonalCoordinatesWhite));
+        assertEquals(Error.NULL, this.draughtWhite.isCorrectDiagonalMovement(1, 0, diagonalCoordinatesWhite));
     }
 
     @Test
